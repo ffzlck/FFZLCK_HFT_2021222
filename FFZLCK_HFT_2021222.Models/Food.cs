@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FFZLCK_HFT_2021222.Models
 {
-    internal class Food
+    public class Food
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,6 +19,7 @@ namespace FFZLCK_HFT_2021222.Models
         public string FoodType { get; set; }
         public double Foodpopularity { get; set; }
 
+        public virtual ICollection<Available> Availables { get; set; }
 
     }
 }

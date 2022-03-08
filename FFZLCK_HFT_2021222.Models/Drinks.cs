@@ -22,6 +22,10 @@ namespace FFZLCK_HFT_2021222.Models
 
         public double DrinkPopularity { get; set; }
 
-        
+        public virtual Pub Pub { get; set; }
+
+        public virtual ICollection<Available> Availables { get; set; }
+
+
     }
 }

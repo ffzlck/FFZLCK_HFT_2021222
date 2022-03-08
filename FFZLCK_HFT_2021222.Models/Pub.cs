@@ -17,5 +17,11 @@ namespace FFZLCK_HFT_2021222.Models
         public string PubName { get; set; }
 
         public double PubRating { get; set; }
+
+        public virtual Available Available { get; set; }
+
+        public virtual ICollection<Available> Availables { get; set; }
+
+        public virtual ICollection<Drinks> Drinks { get; set; }
     }
 }
