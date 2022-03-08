@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,6 +7,11 @@
   <ItemGroup>
     <ProjectReference Include="..\FFZLCK_HFT_2021222.Models\FFZLCK_HFT_2021222.Models.csproj" />
     <ProjectReference Include="..\FFZLCK_HFT_2021222.Repository\FFZLCK_HFT_2021222.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Logics\" />
   </ItemGroup>
 
 </Project>
