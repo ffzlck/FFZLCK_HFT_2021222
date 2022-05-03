@@ -17,5 +17,11 @@ namespace FFZLCK_HFT_2021222.Models
         public string PerformerStyle { get; set; }
         public virtual ICollection<Music> Musics { get; set; }
         public virtual ICollection<Album> Albums { get; set; }
+        public virtual ICollection<Clip> Clips { get; set; }
+
+        public Performer()
+        {
+            
+        }
     }
 }

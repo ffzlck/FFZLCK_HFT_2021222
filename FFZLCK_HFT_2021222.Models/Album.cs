@@ -17,5 +17,6 @@ namespace FFZLCK_HFT_2021222.Models
         public int AlbumPopularity { get; set; }
         public virtual ICollection<Music> Musics { get; set; }
         public int PerformerID { get; set; }
+        public virtual Performer Performer { get; set; }
     }
 }
