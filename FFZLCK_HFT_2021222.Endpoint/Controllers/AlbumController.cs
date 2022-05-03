@@ -27,7 +27,7 @@ namespace FFZLCK_HFT_2021222.Endpoint.Controllers
             return this.logic.Read(id);
         }
         [HttpPost]
-        public void Create(Album item)
+        public void Create([FromBody]Album item)
         {
             this.logic.Create(item);
         }
