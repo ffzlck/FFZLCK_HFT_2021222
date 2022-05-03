@@ -10,8 +10,8 @@ namespace FFZLCK_HFT_2021222.Repository.GenericRepository
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {
-        protected PubDbContext ctx;
-        public Repository(PubDbContext ctx)
+        protected MusicDbContext ctx;
+        public Repository(MusicDbContext ctx)
         {
             this.ctx = ctx;
         }
