@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieDbApp.Client
+namespace FFZLCK_HFT_2021222.Client
 {
     class RestService
     {
