@@ -19,7 +19,7 @@ namespace FFZLCK_HFT_2021222.Endpoint.Controllers
         [HttpGet]
         public IEnumerable<Album> ReadALL()
         {
-            return this.logic.ReadAll();
+            return logic.ReadAll();
         }
         [HttpGet("{id}")]
         public Album Read(int id)

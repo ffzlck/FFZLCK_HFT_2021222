@@ -16,6 +16,7 @@ namespace FFZLCK_HFT_2021222.Models
         public string DirectorName { get; set; }
         public int Income { get; set; }
         public int MusicID { get; set; }
+        [NotMapped]
         public virtual Performer Performer { get; set; }
     }
 }

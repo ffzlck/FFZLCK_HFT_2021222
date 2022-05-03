@@ -18,6 +18,7 @@ namespace FFZLCK_HFT_2021222.Models
         public string Style { get; set; }
         public int PerfromerID { get; set; }
         public int AlbumID { get; set; }
+        [NotMapped]
         public virtual Performer Performer { get; set; }
     }
 }
