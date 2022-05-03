@@ -19,6 +19,6 @@ namespace FFZLCK_HFT_2021222.Models
         [JsonIgnore]
         public virtual ICollection<Music> Musics { get; set; }
         public int PerformerID { get; set; }
-        public virtual Performer Performer { get; set; }
+        public virtual Performer Performer { get; private set; }
     }
 }
