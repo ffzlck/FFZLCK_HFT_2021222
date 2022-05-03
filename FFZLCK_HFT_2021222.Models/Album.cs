@@ -8,18 +8,14 @@ using System.Threading.Tasks;
 
 namespace FFZLCK_HFT_2021222.Models
 {
-    public class Food
+    public class Album
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int FoodID { get; set; }
-
-        public string FoodName { get; set; }
-        public double FoodPrice { get; set; }
-        public string FoodType { get; set; }
-        public double Foodpopularity { get; set; }
-
-        public virtual ICollection<Available> Availables { get; set; }
-
+        public int AlbumID { get; set; }
+        public string AlbumName { get; set; }
+        public int AlbumPopularity { get; set; }
+        public virtual ICollection<Music> Musics { get; set; }
+        public int PerformerID { get; set; }
     }
 }
