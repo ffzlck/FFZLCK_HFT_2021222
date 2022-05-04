@@ -13,11 +13,9 @@ namespace FFZLCK_HFT_2021222.Client
         {
             if (entity == "Music")
             {
-                Console.Write("Enter Actor Name: ");
+                Console.Write("Enter Music Name: ");
                 string name = Console.ReadLine();
-                string performer=Console.ReadLine();
-                int musicid = int.Parse(Console.ReadLine());
-                rest.Post(new Music() { MusicName = name, MusicID = musicid }, "music");
+                rest.Post(new Music() { MusicName = name }, "music");
             }
         }
         static void List(string entity)
@@ -36,22 +34,22 @@ namespace FFZLCK_HFT_2021222.Client
         {
             if (entity == "Music")
             {
-                Console.Write("Enter Actor's id to update: ");
+                Console.Write("Enter Music's id to update: ");
                 int id = int.Parse(Console.ReadLine());
-                Music one = rest.Get<Music>(id, "actor");
+                Music one = rest.Get<Music>(id, "music");
                 Console.Write($"New name [old: {one.MusicName}]: ");
                 string name = Console.ReadLine();
                 one.MusicName = name;
-                rest.Put(one, "actor");
+                rest.Put(one, "music");
             }
         }
         static void Delete(string entity)
         {
-            if (entity == "Actor")
+            if (entity == "Music")
             {
-                Console.Write("Enter Actor's id to delete: ");
+                Console.Write("Enter Music's id to delete: ");
                 int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "actor");
+                rest.Delete(id, "music");
             }
         }
         static void Main(string[] args)
@@ -90,12 +88,16 @@ namespace FFZLCK_HFT_2021222.Client
                 .Add("Update", () => Update("Clip"))
                 .Add("Exit", ConsoleMenu.Close);
 
+            var querySubmenu = new ConsoleMenu(args, level: 1)
+                .Add("Exit", ConsoleMenu.Close);
+
 
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Performer", () => performerSubMenu.Show())
                 .Add("Album", () => albumSubMenu.Show())
                 .Add("Music", () => musicSubmenu.Show())
                 .Add("Clip", () => clipSubmenu.Show())
+                .Add("Query", ()=>querySubmenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();
