@@ -18,6 +18,10 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
         }
         public void Create(Clip item)
         {
+            if(item.DirectorName == null)
+            {
+                throw new ArgumentException("Missing director name!");
+            }
             this.cliprepo.Create(item);
         }
 
@@ -28,6 +32,11 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
 
         public Clip Read(int id)
         {
+            var item = this.cliprepo.Read(id);
+            if (item == null)
+            {
+                throw new ArgumentException("Clip not exists");
+            }
             return this.cliprepo.Read(id);
         }
 
@@ -38,6 +47,10 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
 
         public void Update(Clip item)
         {
+            if (item.DirectorName == null)
+            {
+                throw new ArgumentException("Missing director name!");
+            }
             this.cliprepo.Update(item);
         }
     }

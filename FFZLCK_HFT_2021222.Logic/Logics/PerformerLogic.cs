@@ -18,6 +18,10 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
         }
         public void Create(Performer item)
         {
+            if(item.PerformerName == null)
+            {
+                throw new ArgumentException("Missing name!");
+            }
             this.perfrepo.Create(item);
         }
 
@@ -28,6 +32,11 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
 
         public Performer Read(int id)
         {
+            var item = this.perfrepo.Read(id);
+            if (item == null)
+            {
+                throw new ArgumentException("Performer not exists");
+            }
             return this.perfrepo.Read(id);
         }
 
@@ -38,6 +47,10 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
 
         public void Update(Performer item)
         {
+            if (item.PerformerName == null)
+            {
+                throw new ArgumentException("Missing name!");
+            }
             this.perfrepo.Update(item);
         }
     }

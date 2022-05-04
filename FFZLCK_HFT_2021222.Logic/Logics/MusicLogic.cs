@@ -18,6 +18,10 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
         }
         public void Create(Music item)
         {
+            if(item.MusicName == null)
+            {
+                throw new ArgumentException("Name is missing!");
+            }
             this.musicrepo.Create(item);
         }
 
@@ -28,6 +32,11 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
 
         public Music Read(int id)
         {
+            var item = this.musicrepo.Read(id);
+            if (item == null)
+            {
+                throw new ArgumentException("Music not exists");
+            }
             return this.musicrepo.Read(id);
         }
 
@@ -38,6 +47,10 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
 
         public void Update(Music item)
         {
+            if (item.MusicName == null)
+            {
+                throw new ArgumentException("Name is missing!");
+            }
             this.musicrepo.Update(item);
         }
 

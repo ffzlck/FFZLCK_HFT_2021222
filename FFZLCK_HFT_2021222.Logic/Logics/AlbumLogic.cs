@@ -18,6 +18,10 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
         }
         public void Create(Album item)
         {
+            if(item.AlbumName==null)
+            {
+                throw new ArgumentException("Albumname is missing!");
+            }
             this.albumrepo.Create(item);
         }
 
@@ -28,6 +32,11 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
 
         public Album Read(int id)
         {
+            var item = this.albumrepo.Read(id);
+            if (item == null)
+            {
+                throw new ArgumentException("Album not exists");
+            }
             return this.albumrepo.Read(id);
         }
 
@@ -38,6 +47,10 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
 
         public void Update(Album item)
         {
+            if (item.AlbumName == null)
+            {
+                throw new ArgumentException("Albumname is missing!");
+            }
             this.albumrepo.Update(item);
         }
 
