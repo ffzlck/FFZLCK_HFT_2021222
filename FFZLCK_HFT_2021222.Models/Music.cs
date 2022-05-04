@@ -20,5 +20,25 @@ namespace FFZLCK_HFT_2021222.Models
         public int AlbumID { get; set; }
         [NotMapped]
         public virtual Performer Performer { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            Music m = obj as Music;
+            if (m == null)
+            {
+                return false;
+            }
+            else
+            {
+                return this.AlbumID ==  m.AlbumID 
+                    && this.MusicName == m.MusicName;
+                
+            }
+
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

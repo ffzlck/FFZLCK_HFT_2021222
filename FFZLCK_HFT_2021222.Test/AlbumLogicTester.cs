@@ -1,6 +1,7 @@
 ﻿using FFZLCK_HFT_2021222.Logic.Logics;
 using FFZLCK_HFT_2021222.Models;
 using FFZLCK_HFT_2021222.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -15,19 +16,36 @@ namespace FFZLCK_HFT_2021222.Test
     public class AlbumLogicTester
     {
         AlbumLogic albumLogic;
+        MusicLogic musicLogic;
         Mock<IRepository<Album>> albumMockrepo;
+        Mock<IRepository<Music>> musicMockrepo;
 
         [SetUp]
         public void Init()
         {
-            albumMockrepo=new Mock<IRepository<Album>>();
+            musicMockrepo = new Mock<IRepository<Music>>();
+            musicMockrepo.Setup(x => x.ReadAll()).Returns(new List<Music>()
+            {
+                new Music() {MusicID=1, AlbumID=1, MusicName="Nehézlábérzés"},
+                new Music() {MusicID=2, AlbumID=1, MusicName="PestiEst"},
+                new Music() {MusicID=3, AlbumID=3, MusicName="TEST"}
+            }.AsQueryable());
+
+            musicLogic = new MusicLogic(musicMockrepo.Object);
+
+            //var test = musicLogic.ReadAll();
+
+            albumMockrepo =new Mock<IRepository<Album>>();
             albumMockrepo.Setup(x => x.ReadAll()).Returns(new List<Album>()
             { 
-                new Album() {AlbumID=1, AlbumName="Ösztönlény", AlbumPopularity=10, PerformerID=1},
-                new Album() {AlbumID=2, AlbumName="Hova tovább?", AlbumPopularity=3, PerformerID=2},
-                new Album() {AlbumID=3, AlbumName="Never give you up", AlbumPopularity=7, PerformerID=3}
+                new Album() {AlbumID=1, AlbumName="Ösztönlény", AlbumPopularity=10, PerformerID=1,Musics=new List<Music>(){new Music() {MusicID=1, AlbumID=1, MusicName="Nehézlábérzés"},
+                new Music() {MusicID=2, AlbumID=1, MusicName="PestiEst"}} },
+                new Album() {AlbumID=2, AlbumName="Hova tovább?", AlbumPopularity=3, PerformerID=2,Musics=new List<Music>(){ new Music() { MusicID = 3, AlbumID = 2, MusicName = "Go" } } },
+                //new Album() {AlbumID=3, AlbumName="Never give you up", AlbumPopularity=7, PerformerID=3,Musics=new List<Music>(){ new Music() { MusicID = 4, AlbumID = 3, MusicName = "Easy" } }}
             }.AsQueryable());
             albumLogic = new AlbumLogic(albumMockrepo.Object);
+
+            var test2=albumLogic.ReadAll();
         }
 
         [Test]
@@ -54,6 +72,27 @@ namespace FFZLCK_HFT_2021222.Test
             Assert.Throws<ArgumentException>(()=>albumLogic.Create(album));
 
             
+        }
+        [Test]
+        public void PopularTester()
+        {
+            var result = albumLogic.PopoularAlbumsWithMusic();
+            var except = new List<KeyValuePair<string, ICollection<Music>>>();
+            except.Insert(0, new KeyValuePair<string, ICollection<Music>>("Ösztönlény", new List<Music>(){new Music() {MusicID=1, AlbumID=1, MusicName="Nehézlábérzés"},
+                new Music() {MusicID=2, AlbumID=1, MusicName="PestiEst"}}) );
+
+            Assert.That(result, Is.EqualTo(except));
+        }
+
+        [Test]
+        public void UnPopularTest()
+        {
+            var result = albumLogic.UnPopoularAlbumsWithMusic();
+            var except = new List<KeyValuePair<string, ICollection<Music>>>();
+            except.Insert(0, new KeyValuePair<string, ICollection<Music>>("Hova tovább?", new List<Music>() { new Music() { MusicID = 3, AlbumID = 2, MusicName = "Go" } }));
+
+
+            Assert.That(result, Is.EqualTo(except));
         }
     }
 }

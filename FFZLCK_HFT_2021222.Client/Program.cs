@@ -15,7 +15,24 @@ namespace FFZLCK_HFT_2021222.Client
             {
                 Console.Write("Enter Music Name: ");
                 string name = Console.ReadLine();
-                rest.Post(new Music() { MusicName = name }, "music");
+                Console.Write("Enter Music AlbumID: ");
+                int albumID= int.Parse(Console.ReadLine());
+                Console.Write("Enter PerformerID");
+                int perfID=int.Parse(Console.ReadLine());
+                Performer p=new Performer() { PerformerID=perfID};
+                Console.Write("Enter popularity: ");
+                int pop=int.Parse(Console.ReadLine());
+                rest.Post(new Music() { MusicName = name, AlbumID=albumID, PerfromerID=perfID }, "music");
+            }
+            else if(entity =="Album")
+            {
+                Console.Write("Enter Album Name: ");
+                string name = Console.ReadLine();
+                Console.Write("Enter PerformerID: ");
+                int perfID = int.Parse(Console.ReadLine());
+                Console.Write("Enter popularity: ");
+                int pop = int.Parse(Console.ReadLine());
+                rest.Post(new Album() { AlbumName = name, PerformerID = perfID, AlbumPopularity = pop }, "album");
             }
         }
         static void List(string entity)
@@ -56,9 +73,9 @@ namespace FFZLCK_HFT_2021222.Client
         {
             rest = new RestService("http://localhost:53506/");
 
-            var album = rest.Get<Album>(1,"album");
+           /* var album = rest.Get<Album>(1,"album");
             Console.WriteLine(album.AlbumName);
-            //album.ToList().ForEach(x => Console.WriteLine(x.AlbumName + "..." + x.AlbumID));
+            album.ToList().ForEach(x => Console.WriteLine(x.AlbumName + "..." + x.AlbumID));*/
 
             var performerSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Performer"))
