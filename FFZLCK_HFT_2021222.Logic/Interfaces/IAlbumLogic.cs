@@ -14,5 +14,8 @@ namespace FFZLCK_HFT_2021222.Logic.Interfaces
         Album Read(int id);
         IQueryable<Album> ReadAll();
         void Update(Album item);
+        public IEnumerable<KeyValuePair<string, ICollection<Music>>> PopoularAlbumsWithMusic();
+
+        public IEnumerable<KeyValuePair<string, ICollection<Music>>> UnPopoularAlbumsWithMusic();
     }
 }

@@ -18,7 +18,7 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
         }
         public void Create(Album item)
         {
-            if(item.AlbumName==null)
+            if (item.AlbumName == null)
             {
                 throw new ArgumentException("Albumname is missing!");
             }
@@ -55,5 +55,26 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
         }
 
         //non crud
+
+        public IEnumerable<KeyValuePair<string, ICollection<Music>>> PopoularAlbumsWithMusic()
+        {
+            return from album in albumrepo.ReadAll()
+                   where album.AlbumPopularity>=7
+                   orderby album.AlbumPopularity descending
+                   select new KeyValuePair<string, ICollection<Music>>
+                   (album.AlbumName, album.Musics);
+        }
+
+        public IEnumerable<KeyValuePair<string, ICollection<Music>>> UnPopoularAlbumsWithMusic()
+        {
+            return from album in albumrepo.ReadAll()
+                   where album.AlbumPopularity < 7
+                   orderby album.AlbumPopularity descending
+                   select new KeyValuePair<string, ICollection<Music>>
+                   (album.AlbumName, album.Musics);
+        }
+
+
+
     }
 }
