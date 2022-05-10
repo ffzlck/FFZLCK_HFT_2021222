@@ -21,7 +21,7 @@ namespace FFZLCK_HFT_2021222.Endpoint.Controllers
             return this.albumLogic.PopoularAlbumsWithMusic();
         }
 
-        [HttpGet("Not popular")]
+        [HttpGet("Unpopular")]
         public IEnumerable<KeyValuePair<string, ICollection<Music>>> UnPopularAlbum()
         {
             return this.albumLogic.UnPopoularAlbumsWithMusic();

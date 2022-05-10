@@ -34,6 +34,24 @@ namespace FFZLCK_HFT_2021222.Client
                 int pop = int.Parse(Console.ReadLine());
                 rest.Post(new Album() { AlbumName = name, PerformerID = perfID, AlbumPopularity = pop }, "album");
             }
+            else if (entity == "Performer")
+            {
+                Console.Write("Enter performer name: ");
+                string name= Console.ReadLine();
+                Console.Write("Enter style: ");
+                string style= Console.ReadLine();
+                rest.Post(new Performer() { PerformerName = name, PerformerStyle = style }, "performer");
+            }
+            else
+            {
+                Console.Write("Enter clip directorname:");
+                string name=Console.ReadLine();
+                Console.Write("Income: ");
+                int income=int.Parse(Console.ReadLine());
+                Console.Write("MusicID: ");
+                int mid=int.Parse(Console.ReadLine());
+                rest.Post(new Clip() { DirectorName = name, Income = income, MusicID = mid }, "clip");
+            }
         }
         static void List(string entity)
         {
@@ -43,6 +61,30 @@ namespace FFZLCK_HFT_2021222.Client
                 foreach (var item in music)
                 {
                     Console.WriteLine(item.MusicID + ": " + item.MusicName);
+                }
+            }
+            else if(entity == "Album")
+            {
+                List<Album> album = rest.Get<Album>("album");
+                foreach (var item in album)
+                {
+                    Console.WriteLine(item.AlbumName +", "+ item.AlbumID);
+                }
+            }
+            else if (entity == "Performer")
+            {
+                List<Performer> performer = rest.Get<Performer>("performer");
+                foreach (var item in performer)
+                {
+                    Console.WriteLine(item.PerformerID + ", " + item.PerformerName +", "+item.PerformerStyle);
+                }
+            }
+            else
+            {
+                List<Clip> clip = rest.Get<Clip>("clip");
+                foreach (var item in clip)
+                {
+                    Console.WriteLine(item.ClipID + ", " + item.DirectorName +", "+ item.Income);
                 }
             }
             Console.ReadLine();
@@ -68,14 +110,72 @@ namespace FFZLCK_HFT_2021222.Client
                 int id = int.Parse(Console.ReadLine());
                 rest.Delete(id, "music");
             }
+            else if (entity == "Album")
+            {
+                Console.Write("Enter Album's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "album");
+            }
+            else if (entity == "Performer")
+            {
+                Console.Write("Enter Performer's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "performer");
+            }
+            else
+            {
+                Console.Write("Enter Clip's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "clip");
+            }
+        }
+        static void Non_Crud(string entity)
+        {
+            if (entity == "PopularA")
+            {
+
+                //hogyan hívunk non-crudot statcontrolleren keresztül? 
+
+                Console.WriteLine("Popular albums with overall minimum 7 rating");
+                //List<KeyValuePair<string,ICollection<Music>>> 
+                var x = rest.Get<KeyValuePair<string, ICollection<Music>>>("stat/Popular");
+                foreach (var item in x)
+                {
+                    Console.WriteLine("Album name: " + item.Key);
+                    Console.WriteLine();
+                    Console.WriteLine("Music list");
+                    foreach (var music in item.Value)
+                    {
+                        Console.WriteLine(music.MusicName);
+                    }
+                    Console.WriteLine();
+                }
+
+            }
+            else if (entity == "UnPopularA")
+            {
+                Console.WriteLine("Unpopular albums with overall maximum 7 rating");
+                //List<KeyValuePair<string,ICollection<Music>>> 
+                var x = rest.Get<KeyValuePair<string, ICollection<Music>>>("stat/UnPopular");
+                foreach (var item in x)
+                {
+                    Console.WriteLine("Album name: " + item.Key);
+                    Console.WriteLine();
+                    Console.WriteLine("Music list");
+                    foreach (var music in item.Value)
+                    {
+                        Console.WriteLine(music.MusicName);
+                    }
+                    Console.WriteLine();
+                }
+            }
+            Console.ReadLine();
+
         }
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:53506/");
 
-           /* var album = rest.Get<Album>(1,"album");
-            Console.WriteLine(album.AlbumName);
-            album.ToList().ForEach(x => Console.WriteLine(x.AlbumName + "..." + x.AlbumID));*/
 
             var performerSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Performer"))
@@ -106,6 +206,8 @@ namespace FFZLCK_HFT_2021222.Client
                 .Add("Exit", ConsoleMenu.Close);
 
             var querySubmenu = new ConsoleMenu(args, level: 1)
+                .Add("Popular Albums",()=>Non_Crud("PopularA"))
+                .Add("Unpopular Albums", ()=>Non_Crud("UnPopularA"))
                 .Add("Exit", ConsoleMenu.Close);
 
 
