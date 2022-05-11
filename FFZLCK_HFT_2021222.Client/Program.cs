@@ -123,6 +123,19 @@ namespace FFZLCK_HFT_2021222.Client
                 one.AlbumPopularity = style;
                 rest.Put(one, "album");
             }
+            else if(entity=="Performer")
+            {
+                Console.WriteLine("Enter Performer's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Performer one = rest.Get<Performer>(id, "performer");
+                Console.Write($"New name [old: {one.PerformerName}]: ");
+                string name = Console.ReadLine();
+                Console.WriteLine($"New ID [old: {one.PerformerID}]: ");
+                int mid = int.Parse(Console.ReadLine());
+                one.PerformerID= mid;
+                one.PerformerName = name;
+                rest.Put<Performer>(one, "performer");
+            }
         }
         static void Delete(string entity)
         {
