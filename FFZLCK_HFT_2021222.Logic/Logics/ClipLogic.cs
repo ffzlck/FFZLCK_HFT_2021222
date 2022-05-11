@@ -61,5 +61,11 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
                    select new KeyValuePair<string, double>(g.Key, g.Sum(y => y.Income));
 
         }
+        public IEnumerable<KeyValuePair<string, double>> AVGIncomewithDirector()
+        {
+            return from x in cliprepo.ReadAll()
+                   group x by x.DirectorName into g
+                   select new KeyValuePair<string, double>(g.Key, g.Average(y => y.Income));
+        }
     }
 }

@@ -194,6 +194,14 @@ namespace FFZLCK_HFT_2021222.Client
                 Console.WriteLine();
                 
             }
+            else
+            {
+                var c = rest.Get<KeyValuePair<string, double>>("stat/AVGIncomewithDirector");
+                foreach (var item in c)
+                {
+                    Console.WriteLine("Director: "+item.Key+" Income: "+item.Value);
+                }
+            }
             Console.ReadLine();
 
         }
@@ -236,6 +244,7 @@ namespace FFZLCK_HFT_2021222.Client
                 .Add("Performers all clip income", ()=>Non_Crud("ClipIncome"))
                 .Add("Most productive performer", ()=>Non_Crud("MostProductivePerformer"))
                 .Add("Most biggest album",()=>Non_Crud("MostBiggestAlbum"))
+                .Add("Avarage income from clips", ()=>Non_Crud("AVGIncome"))
                 .Add("Exit", ConsoleMenu.Close);
 
 

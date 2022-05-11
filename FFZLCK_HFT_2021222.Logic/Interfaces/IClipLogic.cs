@@ -15,6 +15,7 @@ namespace FFZLCK_HFT_2021222.Logic.Interfaces
         IQueryable<Clip> ReadAll();
         void Update(Clip item);
 
-        IEnumerable<KeyValuePair<string, double>> PerformerClipIncome();
+        public IEnumerable<KeyValuePair<string, double>> PerformerClipIncome();
+        public IEnumerable<KeyValuePair<string, double>> AVGIncomewithDirector();
     }
 }

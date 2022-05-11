@@ -45,5 +45,11 @@ namespace FFZLCK_HFT_2021222.Endpoint.Controllers
         {
             return this.albumLogic.MostBiggestAlbum();
         }
+        [HttpGet("AVGIncomewithDirector")]
+        public IEnumerable<KeyValuePair<string, double>> AVGIncomewithDirector()
+        {
+            return this.clipLogic.AVGIncomewithDirector();
+        }
+
     }
 }
