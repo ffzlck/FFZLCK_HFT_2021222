@@ -98,7 +98,13 @@ namespace FFZLCK_HFT_2021222.Client
                 Music one = rest.Get<Music>(id, "music");
                 Console.Write($"New name [old: {one.MusicName}]: ");
                 string name = Console.ReadLine();
+                Console.WriteLine($"New ID [old: {one.MusicID}]: ");
+                int mid=int.Parse(Console.ReadLine());
+                Console.WriteLine($"New style [old: {one.Style}]: ");
+                string style=Console.ReadLine();
                 one.MusicName = name;
+                one.Style = style;
+                one.MusicID = mid;
                 rest.Put(one, "music");
             }
         }
