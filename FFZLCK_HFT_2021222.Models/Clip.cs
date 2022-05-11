@@ -17,6 +17,6 @@ namespace FFZLCK_HFT_2021222.Models
         public int Income { get; set; }
         public int MusicID { get; set; }
         [NotMapped]
-        public virtual Performer Performer { get; private set; }
+        public virtual Performer Performer { get; set; }
     }
 }

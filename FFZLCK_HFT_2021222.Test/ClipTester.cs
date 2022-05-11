@@ -21,9 +21,11 @@ namespace FFZLCK_HFT_2021222.Test
         public void Init()
         {
             clipMockrepo = new Mock<IRepository<Clip>>();
+            Performer p=new Performer() { PerformerName="Test"};
             clipMockrepo.Setup(x => x.ReadAll()).Returns(new List<Clip>()
             {
-                new Clip(){ ClipID=1, DirectorName="Michale Bay"}
+                new Clip(){ ClipID=1, DirectorName="Michale Bay", Income=100, MusicID=1, Performer=p},
+                new Clip(){ ClipID=2, Income=100, MusicID=2, Performer=p}
 
             }.AsQueryable());
             logicC = new ClipLogic(clipMockrepo.Object);
@@ -38,6 +40,14 @@ namespace FFZLCK_HFT_2021222.Test
             Assert.Throws<ArgumentException>(() => logicC.Create(item));
 
 
+        }
+        [Test]
+        public void ClipIncomeTest()
+        {
+            var item = logicC.PerformerClipIncome();
+            var expected = new List<KeyValuePair<string, double>>();
+            expected.Insert(0, new KeyValuePair<string, double>("Test", 200));
+            Assert.That(item, Is.EqualTo(expected));
         }
     }
 }

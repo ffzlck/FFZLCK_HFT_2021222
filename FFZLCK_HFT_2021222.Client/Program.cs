@@ -169,6 +169,16 @@ namespace FFZLCK_HFT_2021222.Client
                     Console.WriteLine();
                 }
             }
+            else if(entity == "ClipIncome")
+            {
+                Console.WriteLine("Performer's clip income");
+                var x = rest.Get<KeyValuePair<string, double>>("stat/ClipIncome");
+                foreach (var item in x)
+                {
+                    Console.Write("Performer name: "+ item.Key+" Income: "+ item.Value);
+                    
+                }
+            }
             Console.ReadLine();
 
         }
