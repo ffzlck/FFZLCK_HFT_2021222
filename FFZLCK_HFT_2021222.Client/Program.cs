@@ -136,6 +136,22 @@ namespace FFZLCK_HFT_2021222.Client
                 one.PerformerName = name;
                 rest.Put<Performer>(one, "performer");
             }
+            else
+            {
+                Console.WriteLine("Enter Clip's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Clip one = rest.Get<Clip>(id, "clip");
+                Console.Write($"New name [old: {one.DirectorName}]: ");
+                string name = Console.ReadLine();
+                Console.WriteLine($"New PerformerID [old: {one.MusicID}]: ");
+                int mid = int.Parse(Console.ReadLine());
+                Console.WriteLine($"New ClipID [old: {one.ClipID}]: ");
+                int style = int.Parse(Console.ReadLine());
+                one.DirectorName = name;
+                one.MusicID = mid;
+                one.ClipID = style;
+                rest.Put(one, "clip");
+            }
         }
         static void Delete(string entity)
         {
