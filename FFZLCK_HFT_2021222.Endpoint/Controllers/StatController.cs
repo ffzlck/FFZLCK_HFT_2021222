@@ -11,9 +11,11 @@ namespace FFZLCK_HFT_2021222.Endpoint.Controllers
     public class StatController : ControllerBase
     {
         IAlbumLogic albumLogic;
-        public StatController(IAlbumLogic albumLogic)
+        IClipLogic clipLogic;
+        public StatController(IAlbumLogic albumLogic, IClipLogic clipLogic)
         {
             this.albumLogic = albumLogic;
+            this.clipLogic = clipLogic;
         }
         [HttpGet("Popular")]
         public IEnumerable<KeyValuePair<string, ICollection<Music>>> PopoularAlbum()
@@ -25,6 +27,11 @@ namespace FFZLCK_HFT_2021222.Endpoint.Controllers
         public IEnumerable<KeyValuePair<string, ICollection<Music>>> UnPopularAlbum()
         {
             return this.albumLogic.UnPopoularAlbumsWithMusic();
+        }
+        [HttpGet("ClipIncome")]
+        public IEnumerable<KeyValuePair<string,double>> PerformerClipIncome()
+        {
+            return this.clipLogic.PerformerClipIncome();
         }
     }
 }

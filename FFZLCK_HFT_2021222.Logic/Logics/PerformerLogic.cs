@@ -53,5 +53,11 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
             }
             this.perfrepo.Update(item);
         }
+
+        /*public List<KeyValuePair<string,int>> PerformerMusicNumber()
+        {
+            return from x in perfrepo.ReadAll()
+                   
+        }*/
     }
 }

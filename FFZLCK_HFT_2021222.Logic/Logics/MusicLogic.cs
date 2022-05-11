@@ -56,7 +56,7 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
 
 
         //non crud
-
+        
     }
     
 }

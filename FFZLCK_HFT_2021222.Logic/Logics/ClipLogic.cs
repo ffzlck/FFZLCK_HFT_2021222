@@ -53,5 +53,12 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
             }
             this.cliprepo.Update(item);
         }
+
+        public IEnumerable<KeyValuePair<string,double>> PerformerClipIncome()
+        {
+            return from x in cliprepo.ReadAll()
+                   group x by x.Performer.PerformerName into g
+                   select new KeyValuePair<string, double>(g.Key, g.Sum(y => y.Income));
+        }
     }
 }

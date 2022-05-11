@@ -69,9 +69,12 @@ namespace FFZLCK_HFT_2021222.Repository.Database
             Music beatit=new Music() { MusicID=7, MusicName="Beat It", AlbumID=4, PerfromerID=2 };
             Music babybemine = new Music() { MusicID = 8, MusicName = "Baby Be Mine", AlbumID = 4, PerfromerID = 2 };
 
+            Clip first = new Clip() { ClipID = 1, DirectorName = "Pablo Escobar", Income = 20000, MusicID = 1};
+
             modelBuilder.Entity<Music>().HasData(mhelp, ineedyou, taxman, eleanor, artofmadnes, maria, beatit, babybemine);
             modelBuilder.Entity<Album>().HasData(help, revoler, jacksonstreet, thriller);
             modelBuilder.Entity<Performer>().HasData(beatles, michaeljackson, pinkfloyd, tankcsapda, krúbi, acdc, nirvana);
+            modelBuilder.Entity<Clip>().HasData(first);
             
         }
     }

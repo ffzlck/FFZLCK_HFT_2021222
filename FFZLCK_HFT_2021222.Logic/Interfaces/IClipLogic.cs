@@ -14,5 +14,7 @@ namespace FFZLCK_HFT_2021222.Logic.Interfaces
         Clip Read(int id);
         IQueryable<Clip> ReadAll();
         void Update(Clip item);
+
+        IEnumerable<KeyValuePair<string, double>> PerformerClipIncome();
     }
 }
