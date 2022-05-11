@@ -74,6 +74,14 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
                    (album.AlbumName, album.Musics);
         }
 
+        public IEnumerable<KeyValuePair<string, ICollection<Music>>> MostBiggestAlbum()
+        {
+            int max = albumrepo.ReadAll().Max(x => x.Musics.Count);
+            return from album in albumrepo.ReadAll()
+                   where album.Musics.Count==max
+                   select new KeyValuePair<string, ICollection<Music>>(album.AlbumName, album.Musics);
+        }
+
 
 
     }

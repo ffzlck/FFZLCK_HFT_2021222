@@ -40,7 +40,8 @@ namespace FFZLCK_HFT_2021222.Test
             { 
                 new Album() {AlbumID=1, AlbumName="Ösztönlény", AlbumPopularity=10, PerformerID=1,Musics=new List<Music>(){new Music() {MusicID=1, AlbumID=1, MusicName="Nehézlábérzés"},
                 new Music() {MusicID=2, AlbumID=1, MusicName="PestiEst"}} },
-                new Album() {AlbumID=2, AlbumName="Hova tovább?", AlbumPopularity=3, PerformerID=2,Musics=new List<Music>(){ new Music() { MusicID = 3, AlbumID = 2, MusicName = "Go" } } },
+                new Album() {AlbumID=2, AlbumName="Hova tovább?", AlbumPopularity=3, PerformerID=2,Musics=new List<Music>(){ new Music() { MusicID = 3, AlbumID = 2, MusicName = "Go" }, 
+                new Music{ MusicID=4, AlbumID=2, MusicName="IDC" } } },
                 //new Album() {AlbumID=3, AlbumName="Never give you up", AlbumPopularity=7, PerformerID=3,Musics=new List<Music>(){ new Music() { MusicID = 4, AlbumID = 3, MusicName = "Easy" } }}
             }.AsQueryable());
             albumLogic = new AlbumLogic(albumMockrepo.Object);
@@ -89,10 +90,21 @@ namespace FFZLCK_HFT_2021222.Test
         {
             var result = albumLogic.UnPopoularAlbumsWithMusic();
             var except = new List<KeyValuePair<string, ICollection<Music>>>();
-            except.Insert(0, new KeyValuePair<string, ICollection<Music>>("Hova tovább?", new List<Music>() { new Music() { MusicID = 3, AlbumID = 2, MusicName = "Go" } }));
+            except.Insert(0, new KeyValuePair<string, ICollection<Music>>("Hova tovább?", new List<Music>() { new Music() { MusicID = 3, AlbumID = 2, MusicName = "Go" },
+            new Music{ MusicID=4, AlbumID=2, MusicName="IDC" } }));
 
 
             Assert.That(result, Is.EqualTo(except));
+        }
+
+        [Test]
+        public void MostBiggestTest()
+        {
+            var result = albumLogic.MostBiggestAlbum();
+            var except = new List<KeyValuePair<string, ICollection<Music>>>();
+            except.Insert(0, new KeyValuePair<string, ICollection<Music>>("Hova tovább?", new List<Music>() { new Music() { MusicID = 3, AlbumID = 2, MusicName = "Go" },
+            new Music{ MusicID=4, AlbumID=2, MusicName="IDC" } }));
+
         }
     }
 }

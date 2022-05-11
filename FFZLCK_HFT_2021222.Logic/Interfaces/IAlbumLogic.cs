@@ -17,5 +17,7 @@ namespace FFZLCK_HFT_2021222.Logic.Interfaces
         public IEnumerable<KeyValuePair<string, ICollection<Music>>> PopoularAlbumsWithMusic();
 
         public IEnumerable<KeyValuePair<string, ICollection<Music>>> UnPopoularAlbumsWithMusic();
+
+        public IEnumerable<KeyValuePair<string, ICollection<Music>>> MostBiggestAlbum();
     }
 }

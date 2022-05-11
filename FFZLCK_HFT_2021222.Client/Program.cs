@@ -186,6 +186,14 @@ namespace FFZLCK_HFT_2021222.Client
                 }   
 
             }
+            else if(entity=="MostBiggestAlbum")
+            {
+                var a = rest.Get<KeyValuePair<string, ICollection<Music>>>("stat/MostBiggestAlbum");
+
+                Console.WriteLine("Most biggest album is "+a[0].Key+" with "+a[0].Value.Count+" music.");
+                Console.WriteLine();
+                
+            }
             Console.ReadLine();
 
         }
@@ -227,6 +235,7 @@ namespace FFZLCK_HFT_2021222.Client
                 .Add("Unpopular Albums", ()=>Non_Crud("UnPopularA"))
                 .Add("Performers all clip income", ()=>Non_Crud("ClipIncome"))
                 .Add("Most productive performer", ()=>Non_Crud("MostProductivePerformer"))
+                .Add("Most biggest album",()=>Non_Crud("MostBiggestAlbum"))
                 .Add("Exit", ConsoleMenu.Close);
 
 

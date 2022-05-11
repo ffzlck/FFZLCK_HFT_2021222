@@ -40,5 +40,10 @@ namespace FFZLCK_HFT_2021222.Endpoint.Controllers
         {
             return this.prefLogic.MostProductivePerformer();
         }
+        [HttpGet("MostBiggestAlbum")]
+        public IEnumerable<KeyValuePair<string, ICollection<Music>>> MostBiggestAlbum()
+        {
+            return this.albumLogic.MostBiggestAlbum();
+        }
     }
 }
