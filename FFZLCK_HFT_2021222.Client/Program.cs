@@ -133,11 +133,8 @@ namespace FFZLCK_HFT_2021222.Client
         {
             if (entity == "PopularA")
             {
-
-                //hogyan hívunk non-crudot statcontrolleren keresztül? 
-
+ 
                 Console.WriteLine("Popular albums with overall minimum 7 rating");
-                //List<KeyValuePair<string,ICollection<Music>>> 
                 var x = rest.Get<KeyValuePair<string, ICollection<Music>>>("stat/Popular");
                 foreach (var item in x)
                 {
@@ -176,6 +173,7 @@ namespace FFZLCK_HFT_2021222.Client
                 foreach (var item in x)
                 {
                     Console.Write("Performer name: "+ item.Key+" Income: "+ item.Value);
+                    Console.WriteLine();
                     
                 }
             }
@@ -218,6 +216,7 @@ namespace FFZLCK_HFT_2021222.Client
             var querySubmenu = new ConsoleMenu(args, level: 1)
                 .Add("Popular Albums",()=>Non_Crud("PopularA"))
                 .Add("Unpopular Albums", ()=>Non_Crud("UnPopularA"))
+                .Add("Performers all clip income", ()=>Non_Crud("ClipIncome"))
                 .Add("Exit", ConsoleMenu.Close);
 
 
