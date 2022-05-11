@@ -14,5 +14,7 @@ namespace FFZLCK_HFT_2021222.Logic.Interfaces
         Performer Read(int id);
         IQueryable<Performer> ReadAll();
         void Update(Performer item);
+        public IEnumerable<KeyValuePair<string, int>> MostProductivePerformer();
+
     }
 }

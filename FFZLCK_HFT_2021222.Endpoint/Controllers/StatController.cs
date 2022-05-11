@@ -12,10 +12,12 @@ namespace FFZLCK_HFT_2021222.Endpoint.Controllers
     {
         IAlbumLogic albumLogic;
         IClipLogic clipLogic;
-        public StatController(IAlbumLogic albumLogic, IClipLogic clipLogic)
+        IPerformerLogic prefLogic;
+        public StatController(IAlbumLogic albumLogic, IClipLogic clipLogic, IPerformerLogic prefLogic)
         {
             this.albumLogic = albumLogic;
             this.clipLogic = clipLogic;
+            this.prefLogic = prefLogic;
         }
         [HttpGet("Popular")]
         public IEnumerable<KeyValuePair<string, ICollection<Music>>> PopoularAlbum()
@@ -32,6 +34,11 @@ namespace FFZLCK_HFT_2021222.Endpoint.Controllers
         public IEnumerable<KeyValuePair<string,double>> PerformerClipIncome()
         {
             return this.clipLogic.PerformerClipIncome();
+        }
+        [HttpGet("ProductivePerformer")]
+        public IEnumerable<KeyValuePair<string, int>> MostProductivePerformer()
+        {
+            return this.prefLogic.MostProductivePerformer();
         }
     }
 }

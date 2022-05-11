@@ -27,5 +27,25 @@ namespace FFZLCK_HFT_2021222.Models
         {
             
         }
+
+        public override bool Equals(object obj)
+        {
+            Performer p = obj as Performer;
+            if (p == null)
+            {
+                return false;
+            }
+            else
+            {
+                return this.PerformerName == p.PerformerName;
+                   
+
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

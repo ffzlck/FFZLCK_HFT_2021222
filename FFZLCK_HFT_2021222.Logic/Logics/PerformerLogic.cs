@@ -54,10 +54,22 @@ namespace FFZLCK_HFT_2021222.Logic.Logics
             this.perfrepo.Update(item);
         }
 
-        /*public List<KeyValuePair<string,int>> PerformerMusicNumber()
+        public IEnumerable<KeyValuePair<string, int>> MostProductivePerformer()
         {
-            return from x in perfrepo.ReadAll()
+            int max = perfrepo.ReadAll().Max(x => x.Musics.Count);
+            var x = this.perfrepo.ReadAll().Where(x => x.Musics.Count == max);
+            var test = from p in perfrepo.ReadAll()
+                       where p.Musics.Count == max
+                       select new KeyValuePair<string, int>(p.PerformerName, max);
+            /*Dictionary<string, int> per = new Dictionary<string, int>();
+            foreach (var item in x)
+            {
+                per.Add(item.PerformerName, item.Musics.Count);
+            }*/
+            
+            return test;
+            
                    
-        }*/
+        }
     }
 }

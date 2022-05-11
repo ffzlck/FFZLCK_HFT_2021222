@@ -177,6 +177,15 @@ namespace FFZLCK_HFT_2021222.Client
                     
                 }
             }
+            else if(entity== "MostProductivePerformer")
+            {
+                var p = rest.Get< KeyValuePair<string, int> > ("stat/ProductivePerformer");
+                foreach (var item in p)
+                {
+                    Console.Write("Most productive performer: " + item.Key + " with: " + item.Value + " music.");
+                }   
+
+            }
             Console.ReadLine();
 
         }
@@ -217,6 +226,7 @@ namespace FFZLCK_HFT_2021222.Client
                 .Add("Popular Albums",()=>Non_Crud("PopularA"))
                 .Add("Unpopular Albums", ()=>Non_Crud("UnPopularA"))
                 .Add("Performers all clip income", ()=>Non_Crud("ClipIncome"))
+                .Add("Most productive performer", ()=>Non_Crud("MostProductivePerformer"))
                 .Add("Exit", ConsoleMenu.Close);
 
 
